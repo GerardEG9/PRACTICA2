@@ -69,15 +69,11 @@ return 0;
 }
 
 void Projection( float vect1[N], float vect2[N], float vectres[N] ){
-float num_escalar=Scalar(vect1,vect2); 
+float num_escalar=Scalar(vect1,vect2);
 float magnitude=Magnitude(vect2);
+float operacio=num_escalar/magnitude;
 if (magnitude!=0){
-for (int i=0; i < N; i++){
-vectres[i] = (num_escalar/magnitude)*vect2[i];
-}
-
-} else {
-printf("Error,magnitud=0.\n");
+MultEscalar (vect2,vectres,operacio);
 }
 }
 float Infininorm( float M[N][N] ){
@@ -120,9 +116,27 @@ float sum=0.0;
 int DiagonalDom( float M[N][N] ){
 float sum_element_diagonal=0.0;
 for (int i=0; i < N; i++){
-  sum_element_diagonal+=M[i][i]
+  for (int j=0; j < N; j++){
+    if (i =! j){
+    sum_element_diagonal+=fabs(M[i][j]);
+    }
+    }
+
+  if (M[i][i]<sum_element_diagonal){
+    return 0;
+    }
   }
+  return 1;
 }
+
+void Matriu_x_Vector( float M[N][N], float vect[N], float vectres[N] ){
+  for (int i=0; i < N; i++){
+    for (int j=0; j < N; j++){
+        vectres[i] += M[i][j]*vect[j];
+
+        }
+    }
+  }
 int main(){
     InitData();
     PrintRow(MatDD,0,0,9);
