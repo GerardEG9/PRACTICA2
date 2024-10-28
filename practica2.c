@@ -55,12 +55,12 @@ return sum;
 float Magnitude( float vect[N] ){
  float sum = 0.0;
  for (int i=0; i < N; i++){
- sum+=vect[i]*vect[i];
+ sum+=pow(vect[i],2); // Elevem vect[i] al quadrat
  }
  return sqrt(sum);
  }
 int Ortogonal( float vect1[N], float vect2[N] ){
-float num=Scalar(vect1,vect2);
+float num=Scalar(vect1,vect2); // Utilitzem la funcio scalar feta previament per calcular el producte escalar
 if (num==0){
 return 1;
 } else {
@@ -69,7 +69,7 @@ return 0;
 }
 
 void Projection( float vect1[N], float vect2[N], float vectres[N] ){
-float num_escalar=Scalar(vect1,vect2);
+float num_escalar=Scalar(vect1,vect2); 
 float magnitude=Magnitude(vect2);
 if (magnitude!=0){
 for (int i=0; i < N; i++){
@@ -81,6 +81,20 @@ printf("Error,magnitud=0.\n");
 }
 }
 float Infininorm( float M[N][N] ){
+float sum_fila_max=0.0;
+    for (int i=0; i < N; i++){
+        float sum_fila= 0.0;
+        for (int j=0; j < N; j++){
+            sum_fila+=fabs(M[i][j]);
+        }
+        if (sum_fila>sum_fila_max){
+        sum_fila_max=sum_fila;
+        }
+    }
+    return sum_fila_max;
+}
+
+float Onenorm( float M[N][N] ){
 float sum_columna_max=0.0;
     for (int j=0; j < N; j++){
         float sum_columna= 0.0;
@@ -93,14 +107,15 @@ float sum_columna_max=0.0;
     }
     return sum_columna_max;
 }
+
 float NormFrobenius( float M[N][N] ){
 float sum=0.0;
   for (int i=0; i < N; i++){
-  for (int j=0; j < N; j++){
-    sum+=M[i][j]*M[i][j];
+    for (int j=0; j < N; j++){
+      sum+=M[i][j]*M[i][j];
+      }
     }
-    }
-    return sqrt(sum);
+  return sqrt(sum);
 }
 int DiagonalDom( float M[N][N] ){
 float sum_element_diagonal=0.0;
