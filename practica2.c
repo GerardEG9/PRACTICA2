@@ -168,6 +168,34 @@ vectres[i]=0.0;
 int main(){
 InitData();
 float vectres[N];
+printf("A.\n\n");
+printf("V1 del 0 al 9 i del 256 al 265:\n");
+PrintVect(V1,0, 9 );
+printf("\n");
+PrintVect(V1,256,265 );
+printf("\n\n");
+printf("V2 del 0 al 9 i del 256 al 265:\n");
+PrintVect(V2,0, 9 );
+printf("\n");
+PrintVect(V2,256,265 );
+printf("\n\n");
+printf("V3 del 0 al 9 i del 256 al 265:\n");
+PrintVect(V3,0, 9 );
+printf("\n");
+PrintVect(V3,256,265 );
+printf("\n\n");
+printf("B.\n\n");
+printf("Mat fila 0 i fila 100 del 0 al 9:\n");
+PrintRow(Mat,0,0,9 );
+printf("\n");
+PrintRow(Mat,100,0,9 );
+printf("\n\n");
+printf("C.\n\n");
+printf("MatDD fila 0 del 0 al 9 i fila 100 del 95 al 104:\n");
+PrintRow(MatDD,0,0,9 );
+printf("\n");
+PrintRow(MatDD,100,95,104 );
+printf("\n\n");
 printf("D.\n\n");
 printf("Infininorma de Mat = %f\n",Infininorm(Mat));
 printf("Norma u de Mat = %f\n",Onenorm(Mat));
@@ -182,7 +210,7 @@ printf("\n");
     printf("Norma u de MatDD = %f\n",Onenorm(MatDD));
     printf("Norma de Forbenius = %f\n",NormFrobenius(MatDD));
     if (DiagonalDom(MatDD)==1){
-        printf("La matriu MatDD és diagonal dominant.\n");
+        printf("La matriu MatDD és diagonal dominant.\n\n");
     } else {
         printf("La matriu MatDD no és diagonal dominant.\n\n");
     }
@@ -224,6 +252,10 @@ PrintVect( vectres, 0, 9 );
 printf("\n\n");
 
 printf("K.\n\n");
+if (Jacobi(MatDD,V3,vectres,1)==0){
+printf("La matriu MatDD no és diagonal dominant, no es pot aplicar Jacobi\n");
+}
+else{
 Jacobi(MatDD,V3,vectres,1);
 printf("Els elements 0 a 9 de la solució (1 iter) del sistema d'equacions són:\n");
 PrintVect( vectres, 0, 9 );
@@ -232,6 +264,10 @@ Jacobi(MatDD,V3,vectres,1000);
 printf("Els elements 0 a 9 de la solució (1000 iters) del sistema d'equacions són:\n");
 PrintVect( vectres, 0, 9 );
 printf("\n");
+}
+if (Jacobi(Mat,V3,vectres,1)==0){
+printf("La matriu M no és diagonal dominant, no es pot aplicar Jacobi\n");
+}
 
 
 
